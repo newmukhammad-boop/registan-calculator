@@ -228,8 +228,105 @@
   .pill{padding:4px 11px;border-radius:20px;font-size:11px;font-weight:700;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.85);border:1px solid rgba(255,255,255,0.1);}
   .pill.active-pill{background:rgba(240,165,0,0.25);color:#FDE68A;border:1px solid rgba(240,165,0,0.4);}
 
+  /* ── VOUCHER TOGGLE ── */
+  .voucher-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;}
+  .voucher-label{font-size:13.5px;font-weight:700;color:var(--gray-700);}
+  .voucher-label span{display:block;font-size:11px;color:var(--gray-500);margin-top:2px;font-weight:600;}
+  .voucher-switch{position:relative;width:52px;height:28px;flex-shrink:0;}
+  .voucher-switch input{opacity:0;width:0;height:0;}
+  .voucher-slider{
+    position:absolute;inset:0;border-radius:28px;
+    background:var(--gray-300);cursor:pointer;
+    transition:background 0.25s;
+  }
+  .voucher-slider::before{
+    content:'';position:absolute;width:22px;height:22px;
+    left:3px;top:3px;border-radius:50%;background:white;
+    transition:transform 0.25s;box-shadow:0 1px 4px rgba(0,0,0,0.18);
+  }
+  .voucher-switch input:checked + .voucher-slider{background:var(--gold);}
+  .voucher-switch input:checked + .voucher-slider::before{transform:translateX(24px);}
+  .voucher-info{
+    display:none;margin-top:10px;background:var(--gold-light);
+    border-radius:12px;padding:10px 14px;
+    font-size:12.5px;color:#92400E;border-left:3px solid var(--gold);
+    font-weight:600;line-height:1.6;
+  }
+  .voucher-info.show{display:block;}
+  .voucher-disabled-note{
+    display:none;margin-top:10px;background:#FEF2F2;
+    border-radius:12px;padding:10px 14px;
+    font-size:12px;color:#991B1B;border-left:3px solid #F87171;
+    font-weight:600;line-height:1.6;
+  }
+  .voucher-disabled-note.show{display:block;}
+
+  /* ── SPECIAL MODAL ── */
+  .modal-overlay{
+    display:none;position:fixed;inset:0;z-index:1000;
+    background:rgba(0,0,0,0.55);backdrop-filter:blur(4px);
+    align-items:center;justify-content:center;padding:20px;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-box{
+    background:#fff;border-radius:24px;padding:28px 24px;
+    max-width:380px;width:100%;
+    box-shadow:0 20px 60px rgba(0,0,0,0.25);
+    animation:slideUp 0.3s ease both;
+  }
+  .modal-title{
+    font-family:'Unbounded',sans-serif;font-size:14px;font-weight:900;
+    color:var(--text);margin-bottom:6px;
+  }
+  .modal-sub{font-size:12px;color:var(--gray-500);font-weight:600;margin-bottom:18px;line-height:1.5;}
+  .modal-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:18px;}
+  .modal-item{
+    border-radius:14px;padding:14px 10px;text-align:center;
+    border:2px solid var(--gray-100);background:var(--bg);
+    cursor:pointer;transition:all 0.2s;
+  }
+  .modal-item:hover{border-color:var(--primary);background:var(--primary-light);}
+  .modal-item.selected{border-color:var(--primary);background:linear-gradient(135deg,var(--primary),var(--primary-mid));color:#fff;}
+  .modal-item-num{font-family:'Unbounded',sans-serif;font-size:20px;font-weight:900;color:inherit;}
+  .modal-item-label{font-size:10px;font-weight:700;margin-top:4px;opacity:0.75;}
+  .modal-item-disc{
+    display:inline-block;margin-top:6px;padding:2px 8px;
+    border-radius:20px;font-size:10px;font-weight:800;
+    background:var(--green-light);color:var(--green);
+  }
+  .modal-item.selected .modal-item-disc{background:rgba(255,255,255,0.25);color:#fff;}
+  .modal-item.selected .modal-item-num{color:#fff;}
+  .modal-note{
+    background:#FEF2F2;border-radius:12px;padding:10px 14px;
+    font-size:12px;color:#991B1B;font-weight:600;line-height:1.6;
+    border-left:3px solid #F87171;margin-bottom:16px;
+  }
+  .modal-actions{display:flex;gap:10px;}
+  .modal-btn{
+    flex:1;padding:13px;border-radius:14px;border:none;
+    cursor:pointer;font-family:'Nunito',sans-serif;
+    font-size:13px;font-weight:800;transition:all 0.2s;
+  }
+  .modal-btn-cancel{background:var(--gray-100);color:var(--gray-500);}
+  .modal-btn-cancel:hover{background:var(--gray-300);color:var(--gray-700);}
+  .modal-btn-apply{background:linear-gradient(135deg,var(--primary),var(--primary-mid));color:#fff;box-shadow:0 4px 14px rgba(50,109,219,0.3);}
+  .modal-btn-apply:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(50,109,219,0.4);}
+
+  /* ── SPECIAL BTN ── */
+  .special-btn-wrap{text-align:center;padding:8px 16px 32px;}
+  .special-btn{
+    background:linear-gradient(135deg,#DC2626,#EF4444);
+    color:#fff;border:none;border-radius:14px;
+    padding:13px 24px;font-family:'Nunito',sans-serif;
+    font-size:13px;font-weight:800;cursor:pointer;
+    box-shadow:0 4px 16px rgba(220,38,38,0.3);
+    transition:all 0.2s;display:inline-flex;align-items:center;gap:8px;
+  }
+  .special-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(220,38,38,0.4);}
+  .special-btn:active{transform:scale(0.97);}
+
   /* ── FOOTER ── */
-  .footer{text-align:center;color:var(--gray-500);font-size:11.5px;padding:0 16px 28px;font-weight:600;}
+  .footer{text-align:center;color:var(--gray-500);font-size:11.5px;padding:0 16px 16px;font-weight:600;}
 
   .updating{opacity:0.35;}
 </style>
@@ -293,6 +390,29 @@
     </div>
   </div>
 
+  <div class="card">
+    <div class="card-title">🎟️ Vaucher</div>
+    <div id="voucher-row" class="voucher-row" style="display:none">
+      <div class="voucher-label">
+        Vaucher mavjud
+        <span>Oylik to'lovdan −210 000 so'm/farzand</span>
+      </div>
+      <label class="voucher-switch">
+        <input type="checkbox" id="voucher-switch" onchange="toggleVoucher()">
+        <span class="voucher-slider"></span>
+      </label>
+    </div>
+    <div id="voucher-info" class="voucher-info">
+      🎉 Vaucher qo'llanadi: har bir farzand uchun oylik to'lovdan <strong>−210 000 so'm</strong>.<br>
+      ⚠️ Faqat yangi mijozlar uchun va 2026-yil 1-iyunga qadar amal qiladi.<br>
+      ℹ️ Vaucher bilan faqat ko'p farzandlilik chegirmasi birga ishlaydi.
+    </div>
+    <div id="voucher-disabled-note" class="voucher-disabled-note">
+      ⚠️ Vaucher faqat oylik to'lov rejimida qo'llanadi. Yarim yillik yoki yillik to'lovda vaucher chegirmasi hisobga olinmaydi.
+    </div>
+    <div id="voucher-new-only" style="display:none"></div>
+  </div>
+
   <div class="result-card">
     <div class="result-dots" id="dots"></div>
     <div class="result-label">Jami to'lov summasi</div>
@@ -324,6 +444,44 @@
 
 </div>
 
+<div class="special-btn-wrap">
+  <button class="special-btn" onclick="openSpecialModal()">
+    ⚙️ Maxsus holatlar
+  </button>
+</div>
+
+<!-- MAXSUS HOLATLAR MODAL -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal-box">
+    <div class="modal-title">⚙️ Maxsus holat — Ko'p farzandlilik</div>
+    <div class="modal-sub">Bu sozlama faqat mas'ul moliya xodimlari uchun. Farzandlar soniga qarab alohida chegirma stavkasi belgilang.</div>
+    <div class="modal-grid">
+      <div class="modal-item" id="modal-item-2" onclick="selectModalItem(2)">
+        <div class="modal-item-num">2</div>
+        <div class="modal-item-label">farzand</div>
+        <div class="modal-item-disc">−5%</div>
+      </div>
+      <div class="modal-item" id="modal-item-3" onclick="selectModalItem(3)">
+        <div class="modal-item-num">3</div>
+        <div class="modal-item-label">farzand</div>
+        <div class="modal-item-disc">−7%</div>
+      </div>
+      <div class="modal-item" id="modal-item-4" onclick="selectModalItem(4)">
+        <div class="modal-item-num">4+</div>
+        <div class="modal-item-label">farzand</div>
+        <div class="modal-item-disc">−10%</div>
+      </div>
+    </div>
+    <div class="modal-note">
+      🔒 Bu sozlama standart chegirmadan farqli bo'lib, faqat maxsus holatlarda qo'llanadi. Tasdiqlashdan so'ng kalkulyator yangi stavka bilan hisoblanadi.
+    </div>
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-cancel" onclick="resetSpecial(); closeSpecialModal();">Standartga qaytish</button>
+      <button class="modal-btn modal-btn-apply" onclick="applySpecial()">Tasdiqlash</button>
+    </div>
+  </div>
+</div>
+
 <div class="footer">© 2026 Registon Xususiy Maktabi &nbsp;·&nbsp; 2026/2027 o'quv yili</div>
 
 <script>
@@ -342,7 +500,6 @@
   const PAYMENT_MONTHS={monthly:1,semi:5,annual:10};
   const PAYMENT_DISC={monthly:0,semi:0.07,annual:0.10};
   const PAYMENT_NAMES={monthly:"Oylik to'lov",semi:"Yarim yillik (5 oy)",annual:"Yillik (10 oy)"};
-  let state={client:'new',payment:'monthly',children:1};
 
   function fmt(n){return Math.round(n).toLocaleString('uz-UZ').replace(/,/g,' ')+" so'm";}
 
@@ -350,13 +507,7 @@
     state.client=v;
     document.getElementById('btn-new').classList.toggle('active',v==='new');
     document.getElementById('btn-old').classList.toggle('active',v==='old');
-    const isOld=v==='old';
-    ['tab-semi','tab-annual'].forEach(id=>{
-      const el=document.getElementById(id);
-      el.style.opacity=isOld?'0.38':'1';
-      el.style.pointerEvents=isOld?'none':'auto';
-    });
-    if(isOld&&(state.payment==='semi'||state.payment==='annual')){setPayment('monthly');return;}
+    updateVoucherVisibility();
     calculate();
   }
 
@@ -373,7 +524,78 @@
   function changeChildren(d){
     state.children=Math.max(1,Math.min(10,state.children+d));
     document.getElementById('children-val').textContent=state.children;
+    // Maxsus holatni bekor qilish
+    if(state.special){ resetSpecial(); return; }
     document.getElementById('multi-note').style.display=state.children>=2?'block':'none';
+    calculate();
+  }
+
+  // Vaucher chegirma: oylik to'lovdan 210,000 so'm (faqat yangi mijoz, faqat oylik rejim, faqatgina ko'p farzandlilik chegirmasi qo'llanadi)
+  const VOUCHER_DISCOUNT = 210000;
+
+  // Maxsus holatlar: ko'p farzandlilik chegirma stavkalari
+  // special=false => standart: 2+ farzand = 5%
+  // special=true  => 2=5%, 3=7%, 4+=10%
+  let state={client:'new',payment:'monthly',children:1,voucher:false,special:false,specialChildren:null};
+
+  function getMultiDisc(children){
+    if(state.special && state.specialChildren !== null){
+      // Maxsus rejim: faqat specialChildren soni uchun chegirma
+      if(state.specialChildren===2) return 0.05;
+      if(state.specialChildren===3) return 0.07;
+      if(state.specialChildren>=4)  return 0.10;
+      return 0;
+    }
+    return children>=2 ? 0.05 : 0;
+  }
+
+  function updateVoucherVisibility(){
+    const row=document.getElementById('voucher-row');
+    const infoBox=document.getElementById('voucher-info');
+    const disabledNote=document.getElementById('voucher-disabled-note');
+    const isNew=state.client==='new';
+    const isMonthly=state.payment==='monthly';
+
+    // Vaucher qatori faqat yangi mijoz uchun ko'rinadi
+    row.style.display=isNew?'flex':'none';
+
+    // Eski mijoz bo'lsa vaucher holatini o'chirish
+    if(!isNew){
+      state.voucher=false;
+      const sw=document.getElementById('voucher-switch');
+      if(sw) sw.checked=false;
+      infoBox.classList.remove('show');
+      disabledNote.classList.remove('show');
+      return;
+    }
+
+    if(isNew && !isMonthly && state.voucher){
+      disabledNote.classList.add('show');
+      infoBox.classList.remove('show');
+    } else if(isNew && state.voucher && isMonthly){
+      infoBox.classList.add('show');
+      disabledNote.classList.remove('show');
+    } else {
+      infoBox.classList.remove('show');
+      disabledNote.classList.remove('show');
+    }
+  }
+
+  function toggleVoucher(){
+    const sw=document.getElementById('voucher-switch');
+    state.voucher=sw.checked;
+    updateVoucherVisibility();
+    calculate();
+  }
+
+  function setPayment(v){
+    state.payment=v;
+    ['monthly','semi','annual'].forEach(p=>document.getElementById('tab-'+p).classList.toggle('active',p===v));
+    const note=document.getElementById('payment-note');
+    if(v==='semi'){note.style.display='block';note.innerHTML="💡 5 oy uchun birdan to'lov — <strong>7% chegirma</strong> qo'llanadi.";}
+    else if(v==='annual'){note.style.display='block';note.innerHTML="💡 10 oy uchun birdan to'lov — <strong>10% chegirma</strong> qo'llanadi.";}
+    else{note.style.display='none';}
+    updateVoucherVisibility();
     calculate();
   }
 
@@ -381,14 +603,28 @@
     const base=PRICES[state.client];
     const months=PAYMENT_MONTHS[state.payment];
     const payDisc=PAYMENT_DISC[state.payment];
-    const multiDisc=state.children>=2?0.05:0;
-    const total=base*months*state.children;
-    let disc=total;
-    if(multiDisc>0&&payDisc>0) disc=base*months*state.children*(1-multiDisc)*(1-payDisc);
-    else if(multiDisc>0) disc=base*months*state.children*(1-multiDisc);
-    else if(payDisc>0)   disc=base*months*state.children*(1-payDisc);
+    const effectiveChildren = (state.special && state.specialChildren!==null) ? state.specialChildren : state.children;
+    const multiDisc=getMultiDisc(effectiveChildren);
 
-    const savings=total-disc;
+    // Vaucher: faqat yangi mijoz + oylik rejim + ko'p farzandlilik chegirmasi (payDisc qo'llanmaydi)
+    const vaucherActive = state.voucher && state.client==='new' && state.payment==='monthly';
+
+    const baseTotal = base * months * state.children;
+    let disc = baseTotal;
+
+    if(vaucherActive){
+      // Vaucher rejimida: faqat ko'p farzandlilik chegirmasi + vaucher (oylik -210k/farzand)
+      const multiOnly = multiDisc>0 ? baseTotal*(1-multiDisc) : baseTotal;
+      const vaucherSaving = VOUCHER_DISCOUNT * state.children;
+      disc = multiOnly - vaucherSaving;
+      if(disc<0) disc=0;
+    } else {
+      if(multiDisc>0 && payDisc>0) disc=baseTotal*(1-multiDisc)*(1-payDisc);
+      else if(multiDisc>0) disc=baseTotal*(1-multiDisc);
+      else if(payDisc>0)   disc=baseTotal*(1-payDisc);
+    }
+
+    const savings=baseTotal-disc;
     const monthlyEquiv=disc/months;
     const perChildMonthly=monthlyEquiv/state.children;
     const showMonthly=months>1;
@@ -401,7 +637,7 @@
       document.getElementById('result-total').textContent=fmt(disc);
       document.getElementById('result-period').textContent=`${state.children} farzand uchun jami ${fmt(disc)} to'laysiz`;
       document.getElementById('result-perchild').textContent=state.children>1?`har biriga ${fmt(perChildMonthly)} tushadi`:'';
-      document.getElementById('bd-base').textContent=fmt(total);
+      document.getElementById('bd-base').textContent=fmt(baseTotal);
       document.getElementById('bd-savings').textContent=savings>0?'−'+fmt(savings):'—';
 
       const mBox=document.getElementById('bd-monthly-box');
@@ -414,10 +650,18 @@
       els.forEach(id=>document.getElementById(id).classList.remove('updating'));
 
       const pills=document.getElementById('pills');pills.innerHTML='';
-      [{label:state.client==='new'?'✨ Yangi mijoz':'🔄 Eski mijoz',active:false},
-       {label:PAYMENT_NAMES[state.payment],active:payDisc>0},
-       {label:state.children>=2?`👨‍👩‍👧‍👦 ${state.children} farzand −5%`:`👤 ${state.children} farzand`,active:state.children>=2}
-      ].forEach(p=>{
+      const pillsList=[
+        {label:state.client==='new'?'✨ Yangi mijoz':'🔄 Eski mijoz',active:false},
+        {label:PAYMENT_NAMES[state.payment],active:payDisc>0},
+      ];
+      if(vaucherActive) pillsList.push({label:'🎟️ Vaucher −210,000/oy',active:true});
+      if(state.special && state.specialChildren!==null){
+        const pct=state.specialChildren>=4?10:state.specialChildren===3?7:5;
+        pillsList.push({label:`⚙️ Maxsus: ${state.specialChildren} farzand −${pct}%`,active:multiDisc>0});
+      } else {
+        pillsList.push({label:state.children>=2?`👨‍👩‍👧‍👦 ${state.children} farzand −5%`:`👤 ${state.children} farzand`,active:state.children>=2});
+      }
+      pillsList.forEach(p=>{
         const el=document.createElement('span');
         el.className='pill'+(p.active?' active-pill':'');
         el.textContent=p.label;pills.appendChild(el);
@@ -425,6 +669,56 @@
     },150);
   }
 
+  // ── MAXSUS HOLATLAR MODAL ──
+  let modalSelectedChildren = null;
+
+  function openSpecialModal(){
+    modalSelectedChildren = state.specialChildren;
+    renderModalItems();
+    document.getElementById('modal-overlay').classList.add('open');
+  }
+  function closeSpecialModal(){
+    document.getElementById('modal-overlay').classList.remove('open');
+  }
+  function renderModalItems(){
+    [2,3,4].forEach(n=>{
+      const el=document.getElementById('modal-item-'+n);
+      el.classList.toggle('selected', modalSelectedChildren===n);
+    });
+  }
+  function selectModalItem(n){
+    modalSelectedChildren=n;
+    renderModalItems();
+  }
+  function applySpecial(){
+    if(modalSelectedChildren===null){closeSpecialModal();return;}
+    state.special=true;
+    state.specialChildren=modalSelectedChildren;
+    // Farzandlar soni stepperini ham yangilash
+    const displayChildren = modalSelectedChildren===4 ? Math.max(state.children,4) : modalSelectedChildren;
+    state.children = displayChildren;
+    document.getElementById('children-val').textContent=state.children;
+    document.getElementById('modal-overlay').classList.remove('open');
+    // Ko'p farzand noteni yangilash
+    document.getElementById('multi-note').style.display='block';
+    const pct=modalSelectedChildren>=4?10:modalSelectedChildren===3?7:5;
+    document.getElementById('multi-note').innerHTML=`⚙️ Maxsus holat qo'llanildi: <strong>${modalSelectedChildren===4?'4+':modalSelectedChildren} farzand → −${pct}%</strong> chegirma`;
+    calculate();
+  }
+  function resetSpecial(){
+    state.special=false;
+    state.specialChildren=null;
+    document.getElementById('multi-note').style.display=state.children>=2?'block':'none';
+    if(state.children>=2) document.getElementById('multi-note').innerHTML=`🎉 Ko'p farzandlilik chegirmasi qo'llanadi (<strong>−5%</strong>)`;
+    calculate();
+  }
+
+  // Modal overlay click outside
+  document.getElementById('modal-overlay').addEventListener('click',function(e){
+    if(e.target===this) closeSpecialModal();
+  });
+
+  updateVoucherVisibility();
   calculate();
 </script>
 </body>
