@@ -124,25 +124,44 @@
   }
   .card-title::after{content:'';flex:1;height:1px;background:var(--gray-100);}
 
-  /* ── TOGGLE ── */
-  .toggle-group{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-  .toggle-btn {
-    padding:14px 10px;border-radius:14px;
-    border:2px solid var(--gray-100);background:var(--white);
-    cursor:pointer;font-family:'Nunito',sans-serif;
-    font-size:13px;font-weight:700;color:var(--gray-500);
-    transition:all 0.22s cubic-bezier(0.34,1.56,0.64,1);
-    text-align:center;line-height:1.4;
+  /* ── WARNING BANNER ── */
+  .warning-banner{
+    background:linear-gradient(135deg,#B45309 0%,#D97706 60%,#F59E0B 100%);
+    padding:0;overflow:hidden;position:relative;
   }
-  .toggle-btn:hover{border-color:var(--primary);color:var(--primary);transform:translateY(-1px);}
-  .toggle-btn.active{
-    border-color:var(--primary);
-    background:linear-gradient(135deg,var(--primary) 0%,var(--primary-mid) 100%);
-    color:#fff;box-shadow:0 6px 20px rgba(50,109,219,0.35);
-    transform:translateY(-2px);
+  .warning-banner-inner{
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    padding:11px 20px;
+    animation:warningSlide 0.7s cubic-bezier(0.34,1.56,0.64,1) 0.3s both;
   }
-  .btn-icon{font-size:22px;display:block;margin-bottom:5px;}
-  .btn-sub{font-size:11px;opacity:0.75;font-weight:600;}
+  @keyframes warningSlide{
+    from{opacity:0;transform:translateY(-100%);}
+    to{opacity:1;transform:translateY(0);}
+  }
+  .warning-icon{
+    font-size:18px;flex-shrink:0;
+    animation:warningPulse 2s ease-in-out infinite;
+  }
+  @keyframes warningPulse{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.25) rotate(-5deg);}
+  }
+  .warning-text{
+    font-size:12.5px;font-weight:800;color:#fff;
+    text-align:center;line-height:1.5;
+    text-shadow:0 1px 4px rgba(0,0,0,0.2);
+  }
+  .warning-deadline{
+    display:inline-block;
+    background:rgba(0,0,0,0.2);
+    border-radius:6px;padding:1px 7px;
+    font-size:13px;font-weight:900;
+    animation:deadlineBlink 1.8s ease-in-out infinite;
+  }
+  @keyframes deadlineBlink{
+    0%,100%{background:rgba(0,0,0,0.2);}
+    50%{background:rgba(255,255,255,0.25);}
+  }
 
   /* ── PAYMENT TABS ── */
   .payment-tabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px;}
@@ -344,23 +363,27 @@
   <h1>Registon Xususiy Maktabi</h1>
   <div style="height:10px"></div>
   <span class="header-badge">📅 Narx kalkulyatori — 2026/2027</span>
+  <div style="height:12px"></div>
+  <div style="position:relative;z-index:1;display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,0.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.3);border-radius:16px;padding:10px 20px;">
+    <span style="font-size:20px;">💰</span>
+    <div style="text-align:left;">
+      <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,0.65);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:2px;">Standart oylik narx</div>
+      <div style="font-family:'Unbounded',sans-serif;font-size:20px;font-weight:900;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.2);">4 200 000 so'm</div>
+    </div>
+  </div>
+</div>
+
+<div class="warning-banner">
+  <div class="warning-banner-inner">
+    <span class="warning-icon">⚠️</span>
+    <div class="warning-text">
+      Ushbu shartlar faqatgina <span class="warning-deadline">2026-yil 1-iyungacha</span> amal qiladi
+    </div>
+    <span class="warning-icon">⚠️</span>
+  </div>
 </div>
 
 <div class="container">
-
-  <div class="card">
-    <div class="card-title">Mijoz turi</div>
-    <div class="toggle-group">
-      <button class="toggle-btn active" id="btn-new" onclick="setClient('new')">
-        <span class="btn-icon">✨</span>Yangi mijoz
-        <span class="btn-sub">4 200 000 so'm/oy</span>
-      </button>
-      <button class="toggle-btn" id="btn-old" onclick="setClient('old')">
-        <span class="btn-icon">🔄</span>Eski mijoz
-        <span class="btn-sub">3 990 000 so'm/oy</span>
-      </button>
-    </div>
-  </div>
 
   <div class="card">
     <div class="card-title">To'lov usuli</div>
@@ -404,7 +427,7 @@
     </div>
     <div id="voucher-info" class="voucher-info">
       🎉 Vaucher qo'llanadi: har bir farzand uchun oylik to'lovdan <strong>−210 000 so'm</strong>.<br>
-      ⚠️ Faqat yangi mijozlar uchun va 2026-yil 1-iyunga qadar amal qiladi.<br>
+      ⚠️ 2026-yil 1-iyunga qadar amal qiladi.<br>
       ℹ️ Vaucher bilan faqat ko'p farzandlilik chegirmasi birga ishlaydi.
     </div>
     <div id="voucher-disabled-note" class="voucher-disabled-note">
@@ -496,20 +519,12 @@
   const dotsEl=document.getElementById('dots');
   for(let i=0;i<25;i++){const d=document.createElement('span');dotsEl.appendChild(d);}
 
-  const PRICES={new:4200000,old:3990000};
+  const PRICE = 4200000;
   const PAYMENT_MONTHS={monthly:1,semi:5,annual:10};
   const PAYMENT_DISC={monthly:0,semi:0.07,annual:0.10};
   const PAYMENT_NAMES={monthly:"Oylik to'lov",semi:"Yarim yillik (5 oy)",annual:"Yillik (10 oy)"};
 
   function fmt(n){return Math.round(n).toLocaleString('uz-UZ').replace(/,/g,' ')+" so'm";}
-
-  function setClient(v){
-    state.client=v;
-    document.getElementById('btn-new').classList.toggle('active',v==='new');
-    document.getElementById('btn-old').classList.toggle('active',v==='old');
-    updateVoucherVisibility();
-    calculate();
-  }
 
   function setPayment(v){
     state.payment=v;
@@ -536,7 +551,7 @@
   // Maxsus holatlar: ko'p farzandlilik chegirma stavkalari
   // special=false => standart: 2+ farzand = 5%
   // special=true  => 2=5%, 3=7%, 4+=10%
-  let state={client:'new',payment:'monthly',children:1,voucher:false,special:false,specialChildren:null};
+  let state={payment:'monthly',children:1,voucher:false,special:false,specialChildren:null};
 
   function getMultiDisc(children){
     if(state.special && state.specialChildren !== null){
@@ -553,26 +568,14 @@
     const row=document.getElementById('voucher-row');
     const infoBox=document.getElementById('voucher-info');
     const disabledNote=document.getElementById('voucher-disabled-note');
-    const isNew=state.client==='new';
     const isMonthly=state.payment==='monthly';
 
-    // Vaucher qatori faqat yangi mijoz uchun ko'rinadi
-    row.style.display=isNew?'flex':'none';
+    row.style.display='flex';
 
-    // Eski mijoz bo'lsa vaucher holatini o'chirish
-    if(!isNew){
-      state.voucher=false;
-      const sw=document.getElementById('voucher-switch');
-      if(sw) sw.checked=false;
-      infoBox.classList.remove('show');
-      disabledNote.classList.remove('show');
-      return;
-    }
-
-    if(isNew && !isMonthly && state.voucher){
+    if(!isMonthly && state.voucher){
       disabledNote.classList.add('show');
       infoBox.classList.remove('show');
-    } else if(isNew && state.voucher && isMonthly){
+    } else if(state.voucher && isMonthly){
       infoBox.classList.add('show');
       disabledNote.classList.remove('show');
     } else {
@@ -600,20 +603,18 @@
   }
 
   function calculate(){
-    const base=PRICES[state.client];
+    const base=PRICE;
     const months=PAYMENT_MONTHS[state.payment];
     const payDisc=PAYMENT_DISC[state.payment];
     const effectiveChildren = (state.special && state.specialChildren!==null) ? state.specialChildren : state.children;
     const multiDisc=getMultiDisc(effectiveChildren);
 
-    // Vaucher: faqat yangi mijoz + oylik rejim + ko'p farzandlilik chegirmasi (payDisc qo'llanmaydi)
-    const vaucherActive = state.voucher && state.client==='new' && state.payment==='monthly';
+    const vaucherActive = state.voucher && state.payment==='monthly';
 
     const baseTotal = base * months * state.children;
     let disc = baseTotal;
 
     if(vaucherActive){
-      // Vaucher rejimida: faqat ko'p farzandlilik chegirmasi + vaucher (oylik -210k/farzand)
       const multiOnly = multiDisc>0 ? baseTotal*(1-multiDisc) : baseTotal;
       const vaucherSaving = VOUCHER_DISCOUNT * state.children;
       disc = multiOnly - vaucherSaving;
@@ -651,7 +652,6 @@
 
       const pills=document.getElementById('pills');pills.innerHTML='';
       const pillsList=[
-        {label:state.client==='new'?'✨ Yangi mijoz':'🔄 Eski mijoz',active:false},
         {label:PAYMENT_NAMES[state.payment],active:payDisc>0},
       ];
       if(vaucherActive) pillsList.push({label:'🎟️ Vaucher −210,000/oy',active:true});
